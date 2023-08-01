@@ -54,6 +54,6 @@ const jobSchema = new Schema({
 
   });
 
-const User = model("jobs", jobSchema);
+const Jobs = model("jobs", jobSchema);
 
-module.exports = User;
+module.exports = Jobs;

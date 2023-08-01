@@ -15,7 +15,7 @@ const userSchema = new Schema({
   },
   repeatPassword: {
     type: String,
-    required: [true, "Password does not match"],
+    
   },
 
   isJobseeker: {
@@ -25,11 +25,11 @@ const userSchema = new Schema({
 
   firstName: {
     type: String,
-    required: [true, "First Name is required"],
+   
   },
   lastName: {
     type: String,
-    required: [true, "Last Name is required"],
+    
   },
   aboutMe: {
     type: String,
@@ -44,7 +44,7 @@ const userSchema = new Schema({
 
   companyLocation: {
     type: String,
-    required: [true, "Location is required"],
+   
   },
 });
 
