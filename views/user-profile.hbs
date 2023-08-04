@@ -6,6 +6,7 @@
   <h2>Welcome, {{currentUser.email}}!</h2>
   {{#if currentUser.isJobseeker}}
     <p>This is your profile page, my friend!</p>
+    <a href="/userProfile/edit">Edit Profile</a>
   {{else}}
     <p>This is your company page, my friend!</p>
   {{/if}}

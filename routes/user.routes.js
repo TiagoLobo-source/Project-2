@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User.model")
-
+const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const saltRounds = 10;
 /* GET home page */
-router.get("/userSignup", (req, res, next) => {
+router.get("/userSignup", isLoggedOut, (req, res, next) => {
   res.render("../views/register/signupJobseeker");
 });
 
@@ -38,6 +38,10 @@ router.post("/signupJobseeker", (req, res, next) => {
           }
         });
     }
+  });
+
+  router.get("/userProfile/edit", isLoggedIn, (req, res, next) => {
+    res.render("../views/edit-profile.hbs");
   });
 
 module.exports = router;

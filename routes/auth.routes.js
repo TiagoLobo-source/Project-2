@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 
 /* GET home page */
 router.get("/options", (req, res, next) => {
@@ -17,7 +18,9 @@ router.get("/options", (req, res, next) => {
   res.render("../views/register/step2");
 });*/
 
-router.get("/login", (req, res) => res.render("../views/register/login"));
+router.get("/login", isLoggedOut, (req, res) =>
+  res.render("../views/register/login")
+);
 
 router.post("/login", (req, res, next) => {
   console.log("SESSION =====> ", req.session);
@@ -56,7 +59,7 @@ router.post("/login", (req, res, next) => {
 
 // nothing gets changed except the GET /userProfile route
 
-router.get("/userProfile", (req, res) => {
+router.get("/userProfile", isLoggedIn, (req, res) => {
   console.log(req.session);
   res.render("../views/user-profile", { currentUser: req.session.currentUser });
 });

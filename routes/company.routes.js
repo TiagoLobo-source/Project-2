@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User.model");
-
+const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const saltRounds = 10;
 
 /* GET home page */
-router.get("/companySignup", (req, res, next) => {
+router.get("/companySignup", isLoggedOut, (req, res, next) => {
   res.render("../views/register/signupCompany");
 });
 
