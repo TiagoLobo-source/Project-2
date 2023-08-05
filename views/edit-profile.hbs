@@ -8,19 +8,126 @@
       <input
         type="firstName"
         value="{{firstName}}"
-        name="firstname"
-        placeholder="Omar"
+        name="firstName"
+        placeholder="First Name"
       />
     </label>
+  <label>Birthday: <span>*</span></label>
+      <SELECT id="year" name="year" onchange="change_year(this)" >
+      </SELECT>
+      <SELECT id="month" name="month" onchange="change_month(this)">
+      </SELECT>
+      <SELECT id="day" name="day" >
+      </SELECT>
+      <br />
+      <br />
 
-    <label>Password
-      <input type="password" name="password" placeholder="Type your password" />
-    </label>
+      <label>Password
+        <input type="password" name="password" placeholder="Type your password" />
+      </label>
 
-    <button type="submit">Login</button>
-    {{#if errorMessage}}
+      <button type="submit">Save Details</button>
+      {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
-    {{/if}}
+      {{/if}}
 
-  </form>
-</div>
+    </form>
+  </div>
+
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    let Days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // index => month [0-11]
+
+    $(document).ready(function() {
+      let option = '<option value="day">day</option>';
+      let selectedDay = "day";
+      for (let i = 1; i <= Days[0]; i++) {
+        option += '<option value="' + i + '">' + i + '</option>';
+      }
+      $('#day').append(option);
+      $('#day').val(selectedDay);
+
+      option = '<option value="month">month</option>';
+      let selectedMon = "month";
+      for (let i = 1; i <= 12; i++) {
+        option += '<option value="' + i + '">' + i + '</option>';
+      }
+      $('#month').append(option);
+      $('#month').val(selectedMon);
+
+      option = '<option value="month">month</option>';
+      selectedMon = "month";
+      for (let i = 1; i <= 12; i++) {
+        option += '<option value="' + i + '">' + i + '</option>';
+      }
+      $('#month2').append(option);
+      $('#month2').val(selectedMon);
+
+      let d = new Date();
+      option = '<option value="year">year</option>';
+      selectedYear = "year";
+      for (let i = 1930; i <= d.getFullYear(); i++) {
+        option += '<option value="' + i + '">' + i + '</option>';
+      }
+      $('#year').append(option);
+      $('#year').val(selectedYear);
+    });
+
+    function isLeapYear(year) {
+      year = parseInt(year);
+      if (year % 4 != 0) {
+        return false;
+      } else if (year % 400 == 0) {
+        return true;
+      } else if (year % 100 == 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    function change_year(select) {
+      if (isLeapYear($(select).val())) {
+        Days[1] = 29;
+      } else {
+        Days[1] = 28;
+      }
+
+      if ($("#month").val() == 2) {
+        let day = $('#day');
+        let val = $(day).val();
+        $(day).empty();
+        let option = '<option value="day">day</option>';
+        for (let i = 1; i <= Days[1]; i++) {
+          option += '<option value="' + i + '">' + i + '</option>';
+        }
+        $(day).append(option);
+        if (val > Days[$("#month").val() - 1]) {
+          val = 1;
+        }
+        $(day).val(val);
+      }
+    }
+
+    function change_month(select) {
+      let day = $('#day');
+      let val = $(day).val();
+      $(day).empty();
+      let option = '<option value="day">day</option>';
+      let month = parseInt($(select).val()) - 1;
+      for (let i = 1; i <= Days[month]; i++) {
+        option += '<option value="' + i + '">' + i + '</option>';
+      }
+      $(day).append(option);
+      if (val > Days[month]) {
+        val = 1;
+      }
+      $(day).val(val);
+    }
+  </script>
+
+  <style>
+  .error { color: #d8000c; background-color: #ffbaba; width: fit-content;
+  padding: 2px;}
+</style>

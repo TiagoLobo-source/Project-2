@@ -15,7 +15,6 @@ const userSchema = new Schema({
   },
   repeatPassword: {
     type: String,
-    
   },
 
   isJobseeker: {
@@ -25,27 +24,29 @@ const userSchema = new Schema({
 
   firstName: {
     type: String,
-   
   },
   lastName: {
     type: String,
-    
   },
   aboutMe: {
     type: String,
   },
 
-  dateOfBrith: {
-    type: Date,
-  },
+  dateOfBirth: 
+    {
+      day: { type: Number },
+      month: { type: Number },
+      year: { type: Number },
+    },
+  
+
   professionalExperience: {
     type: String,
   },
 
   companyLocation: {
     type: String,
-   
-  },
+  }
 });
 
 const User = model("User", userSchema);

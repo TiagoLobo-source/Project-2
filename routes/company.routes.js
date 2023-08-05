@@ -9,7 +9,7 @@ const saltRounds = 10;
 
 /* GET home page */
 router.get("/companySignup", isLoggedOut, (req, res, next) => {
-  res.render("../views/register/signupCompany");
+  res.render("register/signupCompany");
 });
 
 
@@ -17,7 +17,7 @@ router.post("/signupCompany", (req, res, next) => {
     let { email, password, isJobseeker } = req.body;
     isJobseeker=false;
     if (email === "" || password === "")
-      res.status(400).render("../views/register/signupCompany", {
+      res.status(400).render("register/signupCompany", {
         errorMessage: "Email and Password are mandatory fields.",
         email,
       });
@@ -29,11 +29,11 @@ router.post("/signupCompany", (req, res, next) => {
           return User.create({ email, passwordHash,isJobseeker });
         })
         .then((user) => {
-          res.render("../views/index", { user });
+          res.render("index", { user });
         })
         .catch((err) => {
           if (err.code === 11000) {
-            res.render("../views/register/signupCompany", {
+            res.render("register/signupCompany", {
               errorMessage: "Email already exists.",
               email,
             });
