@@ -43,8 +43,23 @@ const userSchema = new Schema({
   professionalExperience: {
     type: String,
   },
-
+  companyName: {
+    type: String,
+  },
   companyLocation: {
+    type: String,
+  },
+  companyDescription: {
+    type: String,
+  },
+  companyIndustry: {
+    type: String,
+  },
+
+  companyNumberOfEmployees: {
+    type: Number,
+  },
+  companyContactInfo: {
     type: String,
   }
 });
