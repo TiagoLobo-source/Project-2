@@ -8,18 +8,17 @@ const jobSchema = new Schema({
   },
   description: {
     type: String,
-    required: [true, "Description: is required"],
+    //required: [true, "Description: is required"],
   },
   location: {
     type: String,
-    required: [true, "Location is required"],
+    //required: [true, "Location is required"],
   },
 
   postedBy: {
     type: Schema.Types.ObjectId,
     reference: "User",
   },
-
   appliedBy: [
     {
       type: Schema.Types.ObjectId,
@@ -29,30 +28,30 @@ const jobSchema = new Schema({
 
   industry: {
     type: String,
-    required: [true, "Industry is required"],
+    //required: [true, "Industry is required"],
   },
 
   contractType: {
     type: String,
-    enum:["Part-time","Full-time","Contract", "Freelance"],
-    required: [true, "Contract type is required"],
+    enum: ["Part-time", "Full-time", "Contract", "Freelance"],
+    //required: [true, "Contract type is required"],
   },
 
   salary: {
     type: Number,
-    required: [true, "Salary is required"],
+    //required: [true, "Salary is required"],
   },
 
   responsabilities: {
     type: String,
-    required: [true, "Responsabilities is required"],
+    //required: [true, "Responsabilities is required"],
   },
 
   qualifications: {
     type: String,
-    required: [true, "Qualifications is required"]}
-
-  });
+    //required: [true, "Qualifications is required"]
+  },
+});
 
 const Jobs = model("jobs", jobSchema);
 

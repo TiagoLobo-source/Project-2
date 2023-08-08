@@ -66,7 +66,7 @@ router.get("/userProfile", isLoggedIn, (req, res) => {
 });
 
 router.post("/userProfile/edit", (req, res, next) => {
-  let { 
+  let {
     password,
     repeatPassword,
     firstName,
@@ -75,7 +75,7 @@ router.post("/userProfile/edit", (req, res, next) => {
     day,
     month,
     year,
-    professionalExperience
+    professionalExperience,
   } = req.body;
   
   if (password === "")
