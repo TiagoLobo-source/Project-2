@@ -1,0 +1,19 @@
+{{! views/users/user-profile.hbs }}
+
+{{! the new version, with the session: }}
+
+{{#if currentUser}}
+  <h2>Welcome, {{currentUser.email}}!</h2>
+  {{#if currentUser.isJobseeker}}
+    <p>This is your profile page, my friend!</p>
+    <a href="/userProfile/edit">Edit Profile</a>
+  {{else}}
+    <p>This is your company page, my friend!</p>
+    <a href="/userProfile/edit">Edit Profile</a>
+  {{/if}}
+  <button>
+    <a href="/userProfile">Reload the page</a>
+  </button>
+{{else}}
+  <br /><p>Still no logged in user, sorry!</p>
+{{/if}}
