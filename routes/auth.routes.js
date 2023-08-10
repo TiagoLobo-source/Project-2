@@ -19,9 +19,7 @@ router.get("/options", (req, res, next) => {
   res.render("register/step2");
 });*/
 
-router.get("/login", isLoggedOut, (req, res) =>
-  res.render("register/login")
-);
+router.get("/login", isLoggedOut, (req, res) => res.render("register/login"));
 
 router.post("/login", (req, res, next) => {
   console.log("SESSION =====> ", req.session);
@@ -64,30 +62,38 @@ router.get("/userProfile", isLoggedIn, (req, res) => {
   console.log(req.session);
   res.render("user-profile", { currentUser: req.session.currentUser });
 });
+router.get("/userProfile/edit", isLoggedIn, (req, res) => {
+  console.log(req.session);
+  res.render("edit-profile", { currentUser: req.session.currentUser });
+});
 
-router.post("/userProfile/edit", (req, res, next) => {
+router.post("/userProfile/edit", isLoggedIn, (req, res, next) => {
+  res.render("user-profile", { currentUser: req.session.currentUser });
   let {
     password,
     repeatPassword,
     firstName,
     lastName,
     aboutMe,
-    day,
-    month,
-    year,
+    dateOfBirth,
     professionalExperience,
+    companyName,
+    companyLocation,
+    companyDescription,
+    companyIndustry,
+    companyNumberOfEmployees,
+    companyContactInfo,
   } = req.body;
-  
+
   if (password === "")
     res.status(400).render("edit-profile", {
       errorMessage: "Password is a mandatory field.",
     });
-    else if (day === "day" || month === "month" || year === "year") {
-      res.status(400).render("edit-profile", {
-        errorMessage: "Date of birth is a mandatory field.",
-      });
-    }
-  else {
+  else if (dateOfBirth === "") {
+    res.status(400).render("edit-profile", {
+      errorMessage: "Date of birth is a mandatory field.",
+    });
+  } else {
     bcrypt
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))
@@ -100,14 +106,19 @@ router.post("/userProfile/edit", (req, res, next) => {
           repeatPassword: repeatPassword,
           lastName: lastName,
           aboutMe: aboutMe,
-          dateOfBirth: {day, month,year},
-          professionalExperience: professionalExperience  
-             
+          dateOfBirth: dateOfBirth,
+          professionalExperience: professionalExperience,
+          companyName: companyName,
+          companyLocation: companyLocation,
+          companyDescription: companyDescription,
+          companyIndustry: companyIndustry,
+          companyNumberOfEmployees: companyNumberOfEmployees,
+          companyContactInfo: companyContactInfo,
         };
         return User.findByIdAndUpdate(userId, updateObject);
       })
-      .then((updatedUser) => {
-        req.session.currentUser= updatedUser
+      .then((currentUser) => {
+        req.session.currentUser = currentUser;
         res.redirect("/userProfile");
       })
       .catch((err) => {
@@ -121,12 +132,11 @@ router.post("/userProfile/edit", (req, res, next) => {
   }
 });
 
-router.post("/logout", (req, res, next) => {
+router.post("/logout", isLoggedIn, (req, res, next) => {
   req.session.destroy((err) => {
     if (err) next(err);
     res.redirect("/");
   });
 });
-
 
 module.exports = router;

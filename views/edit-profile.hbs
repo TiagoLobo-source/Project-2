@@ -1,142 +1,145 @@
 <div id="form">
   <h2>Edit Profile</h2>
+  {{#if currentUser.isJobseeker}}
+    <form action="/userProfile/edit" method="POST">
 
-  <form action="/userProfile/edit" method="POST">
-
-    <label>
-      First Name
-      <input
-        type="firstName"
-        value="{{firstName}}"
-        name="firstName"
-        placeholder="First Name"
-      />
-    </label>
-     <label>
-      Last Name
-      <input
-        type="lastName"
-        value="{{lastName}}"
-        name="lastName"
-        placeholder="Last Name"
-      />
-    </label>
-  <label>Birthday: <span>*</span></label>
-      <SELECT id="year" name="year" onchange="change_year(this)" >
-      </SELECT>
-      <SELECT id="month" name="month" onchange="change_month(this)">
-      </SELECT>
-      <SELECT id="day" name="day" >
-      </SELECT>
+      <label>
+        First Name
+        <input
+          type="firstName"
+          value="{{firstName}}"
+          name="firstName"
+          placeholder="First Name"
+        />
+      </label><br /><br /><br /><br />
+      <label>
+        Last Name
+        <input
+          type="lastName"
+          value="{{lastName}}"
+          name="lastName"
+          placeholder="Last Name"
+        />
+      </label><br /><br /><br /><br />
+      <label>Birthday</label>
+      <input type="date" value="{{dateOfBirth}}" name="dateOfBirth" />
       <br />
       <br />
+      <br />
+      <br />
+      <label>
+        About Me
+        <input
+          type="aboutMe"
+          value="{{aboutMe}}"
+          name="aboutMe"
+          placeholder="Describe yourself briefly"
+        />
+      </label><br /><br /><br /><br />
+      <label>
+        Professional Experience
+        <input
+          type="professionalExperience"
+          value="{{professionalExperience}}"
+          name="professionalExperience"
+          placeholder="Past Jobs"
+        />
+      </label><br /><br /><br /><br />
 
       <label>Password
-        <input type="password" name="password" placeholder="Type your password" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Type your password"
+        />
       </label>
 
       <button type="submit">Save Details</button>
       {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
+        <p class="error">{{errorMessage}}</p>
       {{/if}}
 
     </form>
-  </div>
 
-  
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    let Days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // index => month [0-11]
+  {{else}}
 
-    $(document).ready(function() {
-      let option = '<option value="day">day</option>';
-      let selectedDay = "day";
-      for (let i = 1; i <= Days[0]; i++) {
-        option += '<option value="' + i + '">' + i + '</option>';
-      }
-      $('#day').append(option);
-      $('#day').val(selectedDay);
+    <form action="/userProfile/edit" method="POST">
 
-      option = '<option value="month">month</option>';
-      let selectedMon = "month";
-      for (let i = 1; i <= 12; i++) {
-        option += '<option value="' + i + '">' + i + '</option>';
-      }
-      $('#month').append(option);
-      $('#month').val(selectedMon);
+      <label>
+        Company Name
+        <input
+          type="companyName"
+          value="{{companyName}}"
+          name="companyName"
+          placeholder="Company Name"
+        /></label>
+      <br />
+      <br /><br /><br />
+      <label>
+        Location
+        <input
+          type="companyLocation"
+          value="{{companyLocation}}"
+          name="companyLocation"
+          placeholder="Company Location"
+        /></label>
+      <br />
+      <br /><br /><br />
+      <label>
+        Description
+        <input
+          type="companyDescription"
+          value="{{companyDescription}}"
+          name="companyDescription"
+          placeholder="Company Description"
+        /></label>
+      <br />
+      <br /><br /><br />
+      <label>
+        Industry
+        <input
+          type="companyIndustry"
+          value="{{companyIndustry}}"
+          name="companyIndustry"
+          placeholder="Company Industry"
+        />
+      </label><br /><br /><br /><br />
+      <label>
+        Number of Employees
+        <input
+          type="companyNumberOfEmployees"
+          value="{{companyNumberOfEmployees}}"
+          name="companyNumberOfEmployees"
+          placeholder="0"
+        /></label>
+      <br />
+      <br /><br /><br />
+      <label>
+        Contact Info
+        <input
+          type="companyContactInfo"
+          value="{{companyContactInfo}}"
+          name="companyContactInfo"
+          placeholder="Contact Info"
+        /></label>
+      <br />
+      <br /><br /><br />
 
-      option = '<option value="month">month</option>';
-      selectedMon = "month";
-      for (let i = 1; i <= 12; i++) {
-        option += '<option value="' + i + '">' + i + '</option>';
-      }
-      $('#month2').append(option);
-      $('#month2').val(selectedMon);
+      <label>Password
+        <input
+          type="password"
+          name="password"
+          placeholder="Type your password"
+        />
+      </label>
 
-      let d = new Date();
-      option = '<option value="year">year</option>';
-      selectedYear = "year";
-      for (let i = 1930; i <= d.getFullYear(); i++) {
-        option += '<option value="' + i + '">' + i + '</option>';
-      }
-      $('#year').append(option);
-      $('#year').val(selectedYear);
-    });
+      <button type="submit">Save Details</button>
+      {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+      {{/if}}
 
-    function isLeapYear(year) {
-      year = parseInt(year);
-      if (year % 4 != 0) {
-        return false;
-      } else if (year % 400 == 0) {
-        return true;
-      } else if (year % 100 == 0) {
-        return false;
-      } else {
-        return true;
-      }
-    }
+    </form>
 
-    function change_year(select) {
-      if (isLeapYear($(select).val())) {
-        Days[1] = 29;
-      } else {
-        Days[1] = 28;
-      }
+  {{/if}}
 
-      if ($("#month").val() == 2) {
-        let day = $('#day');
-        let val = $(day).val();
-        $(day).empty();
-        let option = '<option value="day">day</option>';
-        for (let i = 1; i <= Days[1]; i++) {
-          option += '<option value="' + i + '">' + i + '</option>';
-        }
-        $(day).append(option);
-        if (val > Days[$("#month").val() - 1]) {
-          val = 1;
-        }
-        $(day).val(val);
-      }
-    }
-
-    function change_month(select) {
-      let day = $('#day');
-      let val = $(day).val();
-      $(day).empty();
-      let option = '<option value="day">day</option>';
-      let month = parseInt($(select).val()) - 1;
-      for (let i = 1; i <= Days[month]; i++) {
-        option += '<option value="' + i + '">' + i + '</option>';
-      }
-      $(day).append(option);
-      if (val > Days[month]) {
-        val = 1;
-      }
-      $(day).val(val);
-    }
-  </script>
-
-  <style>
-  .error { color: #d8000c; background-color: #ffbaba; width: fit-content;
-  padding: 2px;}
-</style>
+</div>

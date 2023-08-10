@@ -32,13 +32,9 @@ const userSchema = new Schema({
     type: String,
   },
 
-  dateOfBirth: 
-    {
-      day: { type: Number },
-      month: { type: Number },
-      year: { type: Number },
-    },
-  
+  dateOfBirth: {
+    type: Date,
+  },
 
   professionalExperience: {
     type: String,
@@ -61,7 +57,7 @@ const userSchema = new Schema({
   },
   companyContactInfo: {
     type: String,
-  }
+  },
 });
 
 const User = model("User", userSchema);
