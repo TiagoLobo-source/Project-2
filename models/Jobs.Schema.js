@@ -26,6 +26,11 @@ const jobSchema = new Schema({
     },
   ],
 
+  postedJob: {
+    type: Boolean,
+    default: true,
+  },
+
   industry: {
     type: String,
     //required: [true, "Industry is required"],

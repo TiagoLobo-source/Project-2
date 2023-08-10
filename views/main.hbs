@@ -1,3 +1,15 @@
-{{#each jobs}}
-  {{title}}
-{{/each}}
+{{#if currentUser.isJobseeker}}
+
+  {{#each jobs}}
+    <a href="/mainpage/{{_id}}">{{this.title}}</a>
+  {{/each}}
+
+{{else}}
+
+  {{#each jobs}}
+    {{title}}
+    {{description}}
+    <form action="/mainpage/{{_id}}/delete" method="POST">
+      <button>Delete Job</button></form>
+  {{/each}}
+{{/if}}

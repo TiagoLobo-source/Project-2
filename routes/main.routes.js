@@ -10,7 +10,6 @@ router.get("/main", isLoggedIn, (req, res, next) => {
   Jobs.find({ postedBy: userId })
     .then((allJobs) => {
       // -> allTheBooksFromDB is a placeholder, it can be any word
-      console.log(allJobs);
 
       res.render("main.hbs", { jobs: allJobs });
     })
@@ -38,6 +37,7 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
     salary,
     responsabilities,
     qualifications,
+    postedJob,
   } = req.body;
   let postedBy = req.session.currentUser._id;
   return Jobs.create({
@@ -51,9 +51,54 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
     salary: salary,
     responsabilities: responsabilities,
     qualifications: qualifications,
+    postedJob: postedJob,
   }).then((createdJob) => {
     res.render("main", { createdJob });
   });
+});
+
+router.get("/mainpage", isLoggedIn, (req, res, next) => {
+  req.session.currentUser;
+  Jobs.find().then((data) => {
+    const jobs = data;
+    res.render("../views/main.hbs", { jobs });
+  });
+});
+
+router.get("/mainpage/:id", isLoggedIn, (req, res, next) => {
+  Jobs.findById(req.params.id).then((oneJob) => {
+    res.render("jobposting/jobapply.hbs", oneJob);
+  });
+});
+
+router.post("/mainpage/:id", isLoggedIn, (req, res, next) => {
+  console.log(req.session);
+  let appliedBy = req.session.currentUser._id;
+  return Jobs.findByIdAndUpdate(
+    req.params.id,
+    { $addToSet: { appliedBy } },
+    { new: true }
+  )
+    .then((updatedJob) => {
+      console.log(updatedJob);
+      res.redirect("/mainpage");
+    })
+    .catch((error) => {
+      console.log(error);
+
+      // Call the error-middleware to display the error page to the user
+      next(error);
+    });
+});
+
+router.post("/mainpage/:id/delete", (req, res) => {
+  Jobs.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.redirect("/main");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 module.exports = router;
