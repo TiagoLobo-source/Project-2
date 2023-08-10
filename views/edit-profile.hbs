@@ -1,0 +1,145 @@
+<div id="form">
+  <h2>Edit Profile</h2>
+  {{#if currentUser.isJobseeker}}
+    <form action="/userProfile/edit" method="POST">
+
+      <label>
+        First Name
+        <input
+          type="firstName"
+          value="{{firstName}}"
+          name="firstName"
+          placeholder="First Name"
+        />
+      </label><br /><br /><br /><br />
+      <label>
+        Last Name
+        <input
+          type="lastName"
+          value="{{lastName}}"
+          name="lastName"
+          placeholder="Last Name"
+        />
+      </label><br /><br /><br /><br />
+      <label>Birthday</label>
+      <input type="date" value="{{dateOfBirth}}" name="dateOfBirth" />
+      <br />
+      <br />
+      <br />
+      <br />
+      <label>
+        About Me
+        <input
+          type="aboutMe"
+          value="{{aboutMe}}"
+          name="aboutMe"
+          placeholder="Describe yourself briefly"
+        />
+      </label><br /><br /><br /><br />
+      <label>
+        Professional Experience
+        <input
+          type="professionalExperience"
+          value="{{professionalExperience}}"
+          name="professionalExperience"
+          placeholder="Past Jobs"
+        />
+      </label><br /><br /><br /><br />
+
+      <label>Password
+        <input
+          type="password"
+          name="password"
+          placeholder="Type your password"
+        />
+      </label>
+
+      <button type="submit">Save Details</button>
+      {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+      {{/if}}
+
+    </form>
+
+  {{else}}
+
+    <form action="/userProfile/edit" method="POST">
+
+      <label>
+        Company Name
+        <input
+          type="companyName"
+          value="{{companyName}}"
+          name="companyName"
+          placeholder="Company Name"
+        /></label>
+      <br />
+      <br /><br /><br />
+      <label>
+        Location
+        <input
+          type="companyLocation"
+          value="{{companyLocation}}"
+          name="companyLocation"
+          placeholder="Company Location"
+        /></label>
+      <br />
+      <br /><br /><br />
+      <label>
+        Description
+        <input
+          type="companyDescription"
+          value="{{companyDescription}}"
+          name="companyDescription"
+          placeholder="Company Description"
+        /></label>
+      <br />
+      <br /><br /><br />
+      <label>
+        Industry
+        <input
+          type="companyIndustry"
+          value="{{companyIndustry}}"
+          name="companyIndustry"
+          placeholder="Company Industry"
+        />
+      </label><br /><br /><br /><br />
+      <label>
+        Number of Employees
+        <input
+          type="companyNumberOfEmployees"
+          value="{{companyNumberOfEmployees}}"
+          name="companyNumberOfEmployees"
+          placeholder="0"
+        /></label>
+      <br />
+      <br /><br /><br />
+      <label>
+        Contact Info
+        <input
+          type="companyContactInfo"
+          value="{{companyContactInfo}}"
+          name="companyContactInfo"
+          placeholder="Contact Info"
+        /></label>
+      <br />
+      <br /><br /><br />
+
+      <label>Password
+        <input
+          type="password"
+          name="password"
+          placeholder="Type your password"
+        />
+      </label>
+
+      <button type="submit">Save Details</button>
+      {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+      {{/if}}
+
+    </form>
+
+  {{/if}}
+
+</div>

@@ -1,0 +1,48 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="form-login">
+      <h2>Post a new Job!</h2>
+      <form action="/main/postjob" method="POST">
+        <label>
+          Title
+
+          <input
+            {{! required}}
+            type="text"
+            value="{{title}}"
+            name="title"
+            placeholder="Job Title"
+          />
+        </label>
+        <label>
+          Description
+
+          <input
+            cols="40"
+            rows="5"
+            style="width:200px; height:50px"
+            type="text"
+            value="{{description}}"
+            name="description"
+            placeholder="Job Description"
+          />
+        </label>
+
+        <button type="submit">Post</button>
+
+        {{#if errorMessage}}
+          <p class="error">{{errorMessage}}</p>
+        {{/if}}
+      </form>
+    </div>
+    <style>
+      .error { color: #d8000c; background-color: #ffbaba; width: fit-content;
+      padding: 2px;}
+    </style>
+  </body>
+</html>
