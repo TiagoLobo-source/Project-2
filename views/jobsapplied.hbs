@@ -1,0 +1,14 @@
+{{#if currentUser.isJobseeker}}
+
+  {{#each jobs}}
+    {{title}}
+  {{/each}}
+
+{{else}}
+
+  {{#each jobs}}
+    {{title}}
+    {{description}}
+  {{/each}}
+{{/if}}
+
