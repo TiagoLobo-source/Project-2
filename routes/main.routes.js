@@ -52,8 +52,8 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
     responsabilities: responsabilities,
     qualifications: qualifications,
     postedJob: postedJob,
-  }).then((createdJob) => {
-    res.render("main", { createdJob });
+  }).then(() => {
+    res.redirect("/main");
   });
 });
 
@@ -71,19 +71,17 @@ router.get("/mainpage/:id", isLoggedIn, (req, res, next) => {
   });
 });
 
-
 router.get("/jobsapplied", isLoggedIn, (req, res, next) => {
   const userId = req.session.currentUser._id;
   const currentUser = req.session.currentUser;
 
-  Jobs.find({appliedBy: userId })
-    .then((jobs) => {
-      if (jobs.length > 0) {
-        res.render("jobsapplied.hbs", { jobs,currentUser});
-      } else {
-        res.render("nojobsapplied.hbs");
-      }
-    })
+  Jobs.find({ appliedBy: userId }).then((jobs) => {
+    if (jobs.length > 0) {
+      res.render("jobsapplied.hbs", { jobs, currentUser });
+    } else {
+      res.render("nojobsapplied.hbs");
+    }
+  });
 });
 
 router.post("/mainpage/:id", isLoggedIn, (req, res, next) => {

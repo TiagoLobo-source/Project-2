@@ -10,9 +10,20 @@
   {{#if currentUser.isJobseeker}}
     <p>This is your profile page, my friend!</p>
     <a href="/userProfile/edit">Edit Profile</a>
+    <br>
+    <br>
+    <a href="/mainpage">Browse All Jobs!</a>
+    <br>
+    <br>
   {{else}}
     <p>This is your company page, my friend!</p>
     <a href="/userProfile/edit">Edit Profile</a>
+    <br>
+    <br>
+    <a href="/main/postjob">Post Your First Job!</a>
+    <br>
+    <br>
+
   {{/if}}
   <button>
     <a href="/userProfile">Reload the page</a>
