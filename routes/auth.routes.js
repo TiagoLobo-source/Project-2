@@ -59,19 +59,12 @@ router.post("/login", (req, res, next) => {
 // nothing gets changed except the GET /userProfile route
 
 router.get("/userProfile", isLoggedIn, (req, res) => {
-  console.log(req.session);
   res.render("user-profile", { currentUser: req.session.currentUser });
-});
-router.get("/userProfile/edit", isLoggedIn, (req, res) => {
-  console.log(req.session);
-  res.render("edit-profile", { currentUser: req.session.currentUser });
 });
 
-router.post("/userProfile/edit", isLoggedIn, (req, res, next) => {
-  res.render("user-profile", { currentUser: req.session.currentUser });
+router.post("/userProfile/edit", isLoggedIn, (req, res) => {
+  res.render("edit-profile", { currentUser: req.session.currentUser });
   let {
-    password,
-    repeatPassword,
     firstName,
     lastName,
     aboutMe,
@@ -85,51 +78,37 @@ router.post("/userProfile/edit", isLoggedIn, (req, res, next) => {
     companyContactInfo,
   } = req.body;
 
-  if (password === "")
-    res.status(400).render("edit-profile", {
-      errorMessage: "Password is a mandatory field.",
+  const userId = req.session.currentUser._id;
+  User.findByIdAndUpdate(
+    userId,
+    {
+      $set: {
+        firstName,
+        lastName,
+        dateOfBirth,
+        aboutMe,
+        professionalExperience,
+        companyName,
+        companyLocation,
+        companyDescription,
+        companyIndustry,
+        companyNumberOfEmployees,
+        companyContactInfo,
+      },
+    },
+    { new: true }
+  )
+    .then((updatedUser) => {
+      req.session.currentUser = updatedUser;
+      console.log(updatedUser);
+      res.redirect("/userProfile");
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  else if (dateOfBirth === "") {
-    res.status(400).render("edit-profile", {
-      errorMessage: "Date of birth is a mandatory field.",
-    });
-  } else {
-    bcrypt
-      .genSalt(saltRounds)
-      .then((salt) => bcrypt.hash(password, salt))
-      .then((passwordHash) => {
-        console.log(req.session);
-        const userId = req.session.currentUser._id;
-        const updateObject = {
-          firstName: firstName,
-          passwordHash: passwordHash,
-          repeatPassword: repeatPassword,
-          lastName: lastName,
-          aboutMe: aboutMe,
-          dateOfBirth: dateOfBirth,
-          professionalExperience: professionalExperience,
-          companyName: companyName,
-          companyLocation: companyLocation,
-          companyDescription: companyDescription,
-          companyIndustry: companyIndustry,
-          companyNumberOfEmployees: companyNumberOfEmployees,
-          companyContactInfo: companyContactInfo,
-        };
-        return User.findByIdAndUpdate(userId, updateObject);
-      })
-      .then((currentUser) => {
-        req.session.currentUser = currentUser;
-        res.redirect("/userProfile");
-      })
-      .catch((err) => {
-        if (err.code === 11000) {
-          res.render("register/signupJobseeker", {
-            errorMessage: "Email already exists.",
-            email,
-          });
-        }
-      });
-  }
+});
+router.get("/userProfile/edit", isLoggedIn, (req, res) => {
+  res.render("edit-profile", { currentUser: req.session.currentUser });
 });
 
 router.post("/logout", isLoggedIn, (req, res, next) => {

@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 
 router.get("/main", isLoggedIn, (req, res, next) => {
   const userId = req.session.currentUser._id;
+  console.log(userId);
   Jobs.find({ postedBy: userId })
     .then((allJobs) => {
       // -> allTheBooksFromDB is a placeholder, it can be any word

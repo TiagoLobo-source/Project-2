@@ -47,8 +47,5 @@ router.post("/signupJobseeker", (req, res, next) => {
     }
   });
 
-  router.get("/userProfile/edit", isLoggedIn, (req, res, next) => {
-    res.render("edit-profile.hbs");
-  });
 
 module.exports = router;

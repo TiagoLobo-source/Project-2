@@ -5,24 +5,23 @@
 
       <label>
         First Name
-        <input
-          type="firstName"
-          value="{{firstName}}"
-          name="firstName"
-          placeholder="{{firsName}}"
-        />
+        <input type="text" value="{{currentUser.firstName}}" name="firstName" />
       </label><br /><br /><br /><br />
       <label>
         Last Name
         <input
-          type="lastName"
-          value="{{lastName}}"
+          type="text"
+          value="{{currentUser.lastName}}"
           name="lastName"
           placeholder="Last Name"
         />
       </label><br /><br /><br /><br />
       <label>Birthday</label>
-      <input type="date" value="{{dateOfBirth}}" name="dateOfBirth" />
+      <input
+        type="date"
+        value="{{currentUser.dateOfBirth}}"
+        name="dateOfBirth"
+      />
       <br />
       <br />
       <br />
@@ -30,8 +29,8 @@
       <label>
         About Me
         <input
-          type="aboutMe"
-          value="{{aboutMe}}"
+          type="text"
+          value="{{currentUser.aboutMe}}"
           name="aboutMe"
           placeholder="Describe yourself briefly"
         />
@@ -39,20 +38,12 @@
       <label>
         Professional Experience
         <input
-          type="professionalExperience"
-          value="{{professionalExperience}}"
+          type="text"
+          value="{{currentUser.professionalExperience}}"
           name="professionalExperience"
           placeholder="Past Jobs"
         />
       </label><br /><br /><br /><br />
-
-      <label>Password
-        <input
-          type="password"
-          name="password"
-          placeholder="Type your password"
-        />
-      </label>
 
       <button type="submit">Save Details</button>
       {{#if errorMessage}}
@@ -69,7 +60,7 @@
         Company Name
         <input
           type="companyName"
-          value="{{companyName}}"
+          value="{{currentUser.companyName}}"
           name="companyName"
           placeholder="Company Name"
         /></label>
@@ -79,7 +70,7 @@
         Location
         <input
           type="companyLocation"
-          value="{{companyLocation}}"
+          value="{{currentUser.companyLocation}}"
           name="companyLocation"
           placeholder="Company Location"
         /></label>
@@ -89,7 +80,7 @@
         Description
         <input
           type="companyDescription"
-          value="{{companyDescription}}"
+          value="{{currentUser.companyDescription}}"
           name="companyDescription"
           placeholder="Company Description"
         /></label>
@@ -99,7 +90,7 @@
         Industry
         <input
           type="companyIndustry"
-          value="{{companyIndustry}}"
+          value="{{currentUser.companyIndustry}}"
           name="companyIndustry"
           placeholder="Company Industry"
         />
@@ -108,7 +99,7 @@
         Number of Employees
         <input
           type="companyNumberOfEmployees"
-          value="{{companyNumberOfEmployees}}"
+          value="{{currentUser.companyNumberOfEmployees}}"
           name="companyNumberOfEmployees"
           placeholder="0"
         /></label>
@@ -118,20 +109,12 @@
         Contact Info
         <input
           type="companyContactInfo"
-          value="{{companyContactInfo}}"
+          value="{{currentUser.companyContactInfo}}"
           name="companyContactInfo"
           placeholder="Contact Info"
         /></label>
       <br />
       <br /><br /><br />
-
-      <label>Password
-        <input
-          type="password"
-          name="password"
-          placeholder="Type your password"
-        />
-      </label>
 
       <button type="submit">Save Details</button>
       {{#if errorMessage}}
