@@ -22,7 +22,6 @@ router.get("/main", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/main/postjob", isLoggedIn, (req, res, next) => {
-  req.session.currentUser;
   res.render("../views/jobposting/jobposting.hbs");
 });
 
@@ -58,10 +57,10 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/mainpage", isLoggedIn, (req, res, next) => {
-  req.session.currentUser;
+  const currentUser = req.session.currentUser;
   Jobs.find().then((data) => {
     const jobs = data;
-    res.render("../views/main.hbs", { jobs });
+    res.render("../views/main.hbs", { currentUser, jobs });
   });
 });
 
