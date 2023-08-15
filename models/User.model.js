@@ -31,6 +31,9 @@ const userSchema = new Schema({
   aboutMe: {
     type: String,
   },
+  imageUrl: {
+    type: String,
+  },
 
   dateOfBirth: {
     type: Date,
@@ -58,6 +61,9 @@ const userSchema = new Schema({
   companyContactInfo: {
     type: String,
   },
+  salary: {
+    type: String,
+  }
 });
 
 const User = model("User", userSchema);

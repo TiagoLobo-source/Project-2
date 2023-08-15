@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User.model");
+const multer = require("multer");
+const fileUploader = require("../config/cloudinary.config");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
@@ -62,51 +64,59 @@ router.get("/userProfile", isLoggedIn, (req, res) => {
   res.render("user-profile", { currentUser: req.session.currentUser });
 });
 
-router.post("/userProfile/edit", isLoggedIn, (req, res) => {
-  res.render("edit-profile", { currentUser: req.session.currentUser });
-  let {
-    firstName,
-    lastName,
-    aboutMe,
-    dateOfBirth,
-    professionalExperience,
-    companyName,
-    companyLocation,
-    companyDescription,
-    companyIndustry,
-    companyNumberOfEmployees,
-    companyContactInfo,
-  } = req.body;
+router.post(
+  "/userProfile/edit",
+  fileUploader.single("cv"),
+  isLoggedIn,
+  (req, res) => {
+    res.render("edit-profile", { currentUser: req.session.currentUser });
+    let {
+      firstName,
+      lastName,
+      aboutMe,
+      dateOfBirth,
+      professionalExperience,
+      companyName,
+      companyLocation,
+      companyDescription,
+      companyIndustry,
+      companyNumberOfEmployees,
+      companyContactInfo,
+      salary, 
+    } = req.body;
 
-  const userId = req.session.currentUser._id;
-  User.findByIdAndUpdate(
-    userId,
-    {
-      $set: {
-        firstName,
-        lastName,
-        dateOfBirth,
-        aboutMe,
-        professionalExperience,
-        companyName,
-        companyLocation,
-        companyDescription,
-        companyIndustry,
-        companyNumberOfEmployees,
-        companyContactInfo,
+    const userId = req.session.currentUser._id;
+    User.findByIdAndUpdate(
+      userId,
+      {
+        $set: {
+          firstName,
+          lastName,
+          dateOfBirth,
+          aboutMe,
+          professionalExperience,
+          imageUrl: req.file.path,
+          companyName,
+          companyLocation,
+          companyDescription,
+          companyIndustry,
+          companyNumberOfEmployees,
+          companyContactInfo,
+          salary,
+        },
       },
-    },
-    { new: true }
-  )
-    .then((updatedUser) => {
-      req.session.currentUser = updatedUser;
-      console.log(updatedUser);
-      res.redirect("/userProfile");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+      { new: true }
+    )
+      .then((updatedUser) => {
+        req.session.currentUser = updatedUser;
+        console.log(updatedUser);
+        res.redirect("/userProfile");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+);
 router.get("/userProfile/edit", isLoggedIn, (req, res) => {
   res.render("edit-profile", { currentUser: req.session.currentUser });
 });

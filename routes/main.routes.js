@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer")
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 const User = require("../models/User.model");
 const Jobs = require("../models/Jobs.Schema");
