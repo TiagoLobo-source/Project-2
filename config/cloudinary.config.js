@@ -1,5 +1,3 @@
-// config/cloudinary.config.js
-
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
@@ -11,14 +9,17 @@ cloudinary.config({
 });
 
 const storage = new CloudinaryStorage({
-  // cloudinary: cloudinary,
   cloudinary,
   params: {
-    allowed_formats: ["jpg", "png", "pdf"],
-    folder: "project-2", // The name of the folder in cloudinary
-    resource_type: "raw",
+    allowed_formats: ["pdf", "png"],
+    folder: "project-2", // The name of the folder in Cloudinary
+    format: "pdf",
   },
 });
 
-//                     storage: storage
-module.exports = multer({ storage });
+const multerCloudinary = multer({ storage }); // Create multer instance for cloudinary
+
+module.exports = {
+  cloudinary,
+  multerCloudinary,
+};

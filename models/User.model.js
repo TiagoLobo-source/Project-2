@@ -31,7 +31,7 @@ const userSchema = new Schema({
   aboutMe: {
     type: String,
   },
-  imageUrl: {
+  cv: {
     type: String,
   },
 
@@ -63,7 +63,7 @@ const userSchema = new Schema({
   },
   salary: {
     type: String,
-  }
+  },
 });
 
 const User = model("User", userSchema);

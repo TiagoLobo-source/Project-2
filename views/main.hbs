@@ -11,14 +11,18 @@
   <a href="/jobsapplied">Your Applications</a>
 
 {{else}}
+  <br />
 
   {{#each jobs}}
     {{title}}
     <br />
-    <a href="/job/edit">Edit Job</a>
+    <br />
+    <form action="/applicants/{{_id}}">
+      <button>Applicants</button></form>
     <form action="/mainpage/{{_id}}/delete" method="POST">
       <button>Delete Job</button></form>
   {{/each}}
+
   <br />
   <br />
   <a href="/main/postjob">Post A Job</a>
