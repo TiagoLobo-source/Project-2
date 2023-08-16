@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 const User = require("../models/User.model")
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 const bcrypt = require("bcrypt");
@@ -47,8 +48,5 @@ router.post("/signupJobseeker", (req, res, next) => {
     }
   });
 
-  router.get("/userProfile/edit", isLoggedIn, (req, res, next) => {
-    res.render("edit-profile.hbs");
-  });
 
 module.exports = router;

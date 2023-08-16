@@ -14,7 +14,7 @@ const express = require("express");
 const hbs = require("hbs");
 
 const app = express();
-require('./config/')(app);
+require("./config/")(app);
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config/session.config")(app);
@@ -36,6 +36,8 @@ const companyRoutes = require("./routes/company.routes");
 app.use("/", companyRoutes);
 const mainRoutes = require("./routes/main.routes");
 app.use("/", mainRoutes);
+
+app.use(express.static("images"));
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

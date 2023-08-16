@@ -31,6 +31,9 @@ const userSchema = new Schema({
   aboutMe: {
     type: String,
   },
+  cv: {
+    type: String,
+  },
 
   dateOfBirth: {
     type: Date,
@@ -56,6 +59,9 @@ const userSchema = new Schema({
     type: Number,
   },
   companyContactInfo: {
+    type: String,
+  },
+  salary: {
     type: String,
   },
 });
