@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User.model");
 const multer = require("multer");
-const fileUploader = require("../config/cloudinary.config");
+const { multerCloudinary } = require("../config/cloudinary.config");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
@@ -66,7 +66,7 @@ router.get("/userProfile", isLoggedIn, (req, res) => {
 
 router.post(
   "/userProfile/edit",
-  fileUploader.single("cv"),
+  multerCloudinary.single("cv"),
   isLoggedIn,
   (req, res) => {
     res.render("edit-profile", { currentUser: req.session.currentUser });
@@ -82,8 +82,9 @@ router.post(
       companyIndustry,
       companyNumberOfEmployees,
       companyContactInfo,
-      salary, 
+      salary,
     } = req.body;
+    const newCvUrl = req.file ? req.file.secure_url : null;
 
     const userId = req.session.currentUser._id;
     User.findByIdAndUpdate(
@@ -95,7 +96,7 @@ router.post(
           dateOfBirth,
           aboutMe,
           professionalExperience,
-          imageUrl: req.file.path,
+          cv: newCvUrl,
           companyName,
           companyLocation,
           companyDescription,
