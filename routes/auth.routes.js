@@ -111,7 +111,7 @@ router.post(
       .then((updatedUser) => {
         req.session.currentUser = updatedUser;
         console.log(updatedUser);
-        res.redirect("/userProfile");
+        res.redirect("/mainpage");
       })
       .catch((err) => {
         console.log(err);
