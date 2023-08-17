@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User.model");
+const multer = require("multer");
+const { multerCloudinary } = require("../config/cloudinary.config");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
@@ -59,77 +61,65 @@ router.post("/login", (req, res, next) => {
 // nothing gets changed except the GET /userProfile route
 
 router.get("/userProfile", isLoggedIn, (req, res) => {
-  console.log(req.session);
   res.render("user-profile", { currentUser: req.session.currentUser });
 });
-router.get("/userProfile/edit", isLoggedIn, (req, res) => {
-  console.log(req.session);
-  res.render("edit-profile", { currentUser: req.session.currentUser });
-});
 
-router.post("/userProfile/edit", isLoggedIn, (req, res, next) => {
-  res.render("user-profile", { currentUser: req.session.currentUser });
-  let {
-    password,
-    repeatPassword,
-    firstName,
-    lastName,
-    aboutMe,
-    dateOfBirth,
-    professionalExperience,
-    companyName,
-    companyLocation,
-    companyDescription,
-    companyIndustry,
-    companyNumberOfEmployees,
-    companyContactInfo,
-  } = req.body;
+router.post(
+  "/userProfile/edit",
+  multerCloudinary.single("cv"),
+  isLoggedIn,
+  (req, res) => {
+    res.render("edit-profile", { currentUser: req.session.currentUser });
+    let {
+      firstName,
+      lastName,
+      aboutMe,
+      dateOfBirth,
+      professionalExperience,
+      companyName,
+      companyLocation,
+      companyDescription,
+      companyIndustry,
+      companyNumberOfEmployees,
+      companyContactInfo,
+      salary,
+    } = req.body;
+    const newCvUrl = req.file ? req.file.secure_url : null;
 
-  if (password === "")
-    res.status(400).render("edit-profile", {
-      errorMessage: "Password is a mandatory field.",
-    });
-  else if (dateOfBirth === "") {
-    res.status(400).render("edit-profile", {
-      errorMessage: "Date of birth is a mandatory field.",
-    });
-  } else {
-    bcrypt
-      .genSalt(saltRounds)
-      .then((salt) => bcrypt.hash(password, salt))
-      .then((passwordHash) => {
-        console.log(req.session);
-        const userId = req.session.currentUser._id;
-        const updateObject = {
-          firstName: firstName,
-          passwordHash: passwordHash,
-          repeatPassword: repeatPassword,
-          lastName: lastName,
-          aboutMe: aboutMe,
-          dateOfBirth: dateOfBirth,
-          professionalExperience: professionalExperience,
-          companyName: companyName,
-          companyLocation: companyLocation,
-          companyDescription: companyDescription,
-          companyIndustry: companyIndustry,
-          companyNumberOfEmployees: companyNumberOfEmployees,
-          companyContactInfo: companyContactInfo,
-        };
-        return User.findByIdAndUpdate(userId, updateObject);
-      })
-      .then((currentUser) => {
-        req.session.currentUser = currentUser;
+    const userId = req.session.currentUser._id;
+    User.findByIdAndUpdate(
+      userId,
+      {
+        $set: {
+          firstName,
+          lastName,
+          dateOfBirth,
+          aboutMe,
+          professionalExperience,
+          cv: newCvUrl,
+          companyName,
+          companyLocation,
+          companyDescription,
+          companyIndustry,
+          companyNumberOfEmployees,
+          companyContactInfo,
+          salary,
+        },
+      },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        req.session.currentUser = updatedUser;
+        console.log(updatedUser);
         res.redirect("/userProfile");
       })
       .catch((err) => {
-        if (err.code === 11000) {
-          res.render("register/signupJobseeker", {
-            errorMessage: "Email already exists.",
-            email,
-          });
-        }
+        console.log(err);
       });
   }
+);
+router.get("/userProfile/edit", isLoggedIn, (req, res) => {
+  res.render("edit-profile", { currentUser: req.session.currentUser });
 });
 
 router.post("/logout", isLoggedIn, (req, res, next) => {

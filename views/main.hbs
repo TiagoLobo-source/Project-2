@@ -1,19 +1,29 @@
-
-
-
+<br />
+<br />
 
 {{#if currentUser.isJobseeker}}
-
   {{#each jobs}}
     <a href="/mainpage/{{_id}}">{{title}}</a>
   {{/each}}
+  <br />
+  <br />
+
+  <a href="/jobsapplied">Your Applications</a>
 
 {{else}}
+  <br />
 
   {{#each jobs}}
     {{title}}
-    {{description}}
+    <br />
+    <br />
+    <form action="/applicants/{{_id}}">
+      <button>Applicants</button></form>
     <form action="/mainpage/{{_id}}/delete" method="POST">
       <button>Delete Job</button></form>
   {{/each}}
+
+  <br />
+  <br />
+  <a href="/main/postjob">Post A Job</a>
 {{/if}}
