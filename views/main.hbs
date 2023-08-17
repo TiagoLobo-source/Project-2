@@ -256,27 +256,27 @@ body{
     
   
     
-  <div class="job-list">
+ <div class="job-list">
   {{#each jobs}}
     <div class="job-item">
       <div class="job-detail">{{title}}</div>
       <div class="job-detail">{{companyName}}</div>
       <div class="job-detail">{{location}}</div>
       <div class="job-detail">{{salary}}</div>
-      <button class="btn btn-outline-success" type="submit">
-        <a href="/mainpage/{{_id}}" style="color:white; text-decoration:none;">OPEN</a>
-      </button>
-
-
-       <form style="margin-bottom: 0px; margin-left: 10px;" action="/mainpage/{{_id}}/delete" method="POST">
-          <button class="btn btn-outline-success" >
-          REMOVE
+      <div class="job-actions">
+        <button class="btn btn-outline-success" type="submit">
+          <a href="/mainpage/{{_id}}" style="color:white; text-decoration:none;">OPEN</a>
+        </button>
+        <form style="margin-bottom: 0px; margin-left: 10px;" action="/mainpage/{{_id}}/delete" method="POST">
+          <button class="btn btn-outline-success">
+            REMOVE
           </button>
         </form>
-        
+        <a href="/applicants/{{_id}}" class="check-applicants-link">CHECK APPLICANTS</a>
+      </div>
     </div>
-    <a href="/applicants/{{_id}}" style="color:white;text-decoration:none">CHECK APPLICANTS</a> 
   {{/each}}
+</div>
   
 </div>
 {{else}}
@@ -293,7 +293,19 @@ body{
           </div>
 {{/if}}
 {{/if}}
-<style>.job-list {
+<style>
+  .job-actions {
+  display: flex;
+  align-items: center;
+}
+
+.check-applicants-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+}
+  
+  .job-list {
   width: 85%;
   display: flex;
   flex-direction: column;
