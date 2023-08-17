@@ -99,7 +99,7 @@
       <div class="job-detail">{{location}}</div>
       <div class="job-detail">{{salary}}</div>
       <button class="btn btn-outline-success" type="submit">
-        <a href="/mainpage/{{_id}}" style="color:white;">OPEN</a>
+        <a href="/mainpage/{{_id}}" style="color:white;text-decoration:none">OPEN</a>
       </button>
     </div>
   {{/each}}
@@ -263,12 +263,12 @@ body{
       <div class="job-detail">{{location}}</div>
       <div class="job-detail">{{salary}}</div>
       <button class="btn btn-outline-success" type="submit">
-        <a href="/mainpage/{{_id}}" style="color:white;text-decoration:none;">OPEN</a>
+        <a href="/mainpage/{{_id}}" style="color:white; text-decoration:none;">OPEN</a>
       </button>
 
 
        <form style="margin-bottom: 0px; margin-left: 10px;" action="/mainpage/{{_id}}/delete" method="POST">
-          <button class="btn btn-outline-success">
+          <button class="btn btn-outline-success" >
           REMOVE
           </button>
         </form>
