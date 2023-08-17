@@ -60,8 +60,8 @@ router.post("/login", (req, res, next) => {
 
 // nothing gets changed except the GET /userProfile route
 
-router.get("/userProfile", isLoggedIn, (req, res) => {
-  res.render("user-profile", { currentUser: req.session.currentUser });
+router.get("/mainpage", isLoggedIn, (req, res) => {
+  res.render("/mainpage", { currentUser: req.session.currentUser });
 });
 
 router.post(
