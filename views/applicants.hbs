@@ -1,13 +1,4 @@
-{{#each downloadLinks}}
-  <br />
-  {{applicant.firstName}}
-  <br />
-  {{applicant.email}}
-  <br />
-  <a href="{{applicant.cv}}" download>Download CV PDF</a>
-  <br />
-  <br />
-{{/each}}
+
 </div> 
 <!doctype html>
 <html lang="en">
@@ -63,7 +54,7 @@
   </header>
 </div>
 
-{{#if currentUser.isJobseeker}}
+
       <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-4 border-bottom">
           <div class="container">
@@ -200,9 +191,6 @@ body{
   }
  
 </style>
-
-{{else}}
-<script>window.open("/main");</script>
 
 </body>
 </html>
