@@ -1,14 +1,408 @@
-{{#if currentUser.isJobseeker}}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hrd</title>
+    <!-- BOOTSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    
+</head>
+  <body>
 
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-4 border-bottom">
+          <div class="col-md-5 mb-2 mb-md-0">
+
+    <!-- LOGO-->
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+              <img class="logo" src="image/Logo.png" alt="">
+            </a>
+          </div>
+    
+        
+    <!-- BUTTONS -->
+    <div class="col-md-4 text-end">
+      <div style="width: 100%; height: 100%; justify-content: flex-start; align-items: flex-start; gap: 60px; display: inline-flex">
+        <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+            <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="">Explore</a></div>
+            <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
+        </div>
+        <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+          <div style=" width: 140px; color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="">Your applications</a></div>
+          <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
+        </div>
+        <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+          <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link"  style="color: #8F00FF; text-decoration:none;" href="">Favourites</a></div>
+          <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
+        </div>
+        <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+            <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="">Account</a></div>
+            <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
+        </div>
+        <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+          <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color:#8F00FF; text-decoration:none;" href="">Logout</a></div>
+          <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
+      </div>
+    </div>
+    </div>
+  </header>
+</div>
+
+{{#if currentUser.isJobseeker}}
+      <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-4 border-bottom">
+          <div class="container">
+            <h1 class="mt-4 mb-4">All Jobs Available</h1>
+        </div>
+        </header>
+    </div>
+    
+
+    <!-- HERO-->
+    <nav style="width: 30%; margin-left: 30px;" class="d-flex justify-content-md-start">
+      <form class="form-inline">
+        <div class="input-group">
+          
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          <button style="font-size:16px; color:white; border:none; text-transform: uppercase;background-color:#8F00FF;" class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+      </form>
+    </nav>
+    
+    
+<div class="job-list">
+   <div class="job-item" style="background: none;">
+    <div class="job-detail">JOB TITLE</div>
+    <div class="job-detail">COMPANY</div>
+    <div class="job-detail">LOCATION</div>
+    <div class="job-detail">SALARY</div>
+    <button class="btn btn-outline-success" type="submit" style="background: none;">
+        <a style="opacity: 0;">OPEN</a>
+      </button>
+    
+  </div>
+ </div>
+
+
+    
+  
+    
+  <div class="job-list">
   {{#each jobs}}
-    {{title}}
+    <div class="job-item">
+      <div class="job-detail">{{title}}</div>
+      <div class="job-detail">{{company}}</div>
+      <div class="job-detail">{{location}}</div>
+      <div class="job-detail">{{salary}}</div>
+      <button class="btn btn-outline-success" type="submit">
+        <a href="/mainpage/{{_id}}" style="color:white;text-decoration:none">OPEN</a>
+      </button>
+    </div>
+    
   {{/each}}
+</div>
+<style>.job-list {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.job-item {
+  width: 100%; 
+  margin: 10px auto;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  border-bottom: 0.50px #D9D9D9 solid;
+  display: flex;
+  align-items: center;
+}
+
+.job-detail {
+  width: 300px;
+  color: #380163;
+  font-size: 16px;
+  font-family: Syne;
+  font-weight: 700;
+  line-height: 35.20px;
+  word-wrap: break-word;
+  margin-right: 10px; 
+}
+
+.btn-outline-success {
+  font-size: 16px;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  background-color: #8F00FF;
+}</style>
+
+      </div>
+ </div>
+      
+
+
+
+
+
+    <!-- BOOTSTRAP JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  
+    <!-- BOOSTRAP POPPER FOR DROPDOWNS, POPOVERS ETC
+    
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    -->
+
+</body>
+</html>
+
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Syne:wght@400;500;600;700;800&display=swap');
+
+*{
+    font-family: 'Inter', sans-serif;
+   
+
+}
+
+h1{
+    font-family: 'Syne', sans-serif;
+    color:#380163;
+}
+
+body{
+    background: linear-gradient(6deg, #FFF 0%, #e1baff 100%);
+
+    flex-shrink: 0;
+}
+
+  .btn:hover{
+    transform: scale(1.1);
+  }
+  .link:hover{
+    font-weight: bold;
+  }
+ 
+</style>
 
 {{else}}
+{{#if jobs.length}}
+  
 
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hrd</title>
+    <!-- BOOTSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    
+</head>
+  <body>
+
+    
+      <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-4 border-bottom">
+          <div class="container">
+            <h1 class="mt-4 mb-4">Jobs Active</h1>
+        </div>
+        </header>
+    </div>
+    
+
+    <!-- HERO-->
+    <nav style="width: 100%;" class="d-flex justify-content-md-start">
+      <form class="form-inline" style="width:85%">
+        <div class="input-group">
+          
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          <button style="font-size:16px; color:white; border-radius: 10px; border:none; text-transform: uppercase;background-color:#8F00FF;" class="btn btn-outline-success" type="submit">Search</button>
+        <div class="d-grid gap-2 d-md-flex" style="margin-left: 30%;">
+             <a href="/main/postjob" class="btn btn-primary btn-lg px-4 me-md-2" style="border-radius: 30px; font-size: 16px; color: white; text-transform: uppercase; background-color: #8F00FF;">ADD JOB POST</a>
+            </div>
+        </div>
+        
+    
+      </form>
+    </nav>
+   
+<div class="job-list">
+   <div class="job-item" style="background: none;">
+    <div class="job-detail">JOB TITLE</div>
+    <div class="job-detail">COMPANY</div>
+    <div class="job-detail">LOCATION</div>
+    <div class="job-detail">SALARY</div>
+    <button class="btn btn-outline-success" type="submit" style=" background: none; margin-right:20px">
+        <a style="opacity: 0;">OPEN</a>
+        <a style="opacity: 0;">OPEN</a>
+        <a style="opacity: 0;">OPEN</a>
+        <a style="opacity: 0;">OPEN</a>
+        <a style="opacity: 0;">OPEN</a>
+      </button>
+      
+  </div>
+ </div>
+
+
+    
+  
+    
+ <div class="job-list">
   {{#each jobs}}
-    {{title}}
-    {{description}}
+    <div class="job-item">
+      <div class="job-detail">{{title}}</div>
+      <div class="job-detail">{{companyName}}</div>
+      <div class="job-detail">{{location}}</div>
+      <div class="job-detail">{{salary}}</div>
+      <div class="job-actions">
+        <button class="btn btn-outline-success" type="submit">
+          <a href="/mainpage/{{_id}}" style="color:white; text-decoration:none;">OPEN</a>
+        </button>
+        <form style="margin-bottom: 0px; margin-left: 10px;" action="/mainpage/{{_id}}/delete" method="POST">
+          <button class="btn btn-outline-remove">
+            REMOVE
+          </button>
+        </form>
+        <a href="/applicants/{{_id}}" class="check-applicants-link">APPLICANTS</a>
+      </div>
+    </div>
   {{/each}}
+</div>
+  
+</div>
+{{else}}
+  <div class="container ">
+      <div class="row d-flex justify-content-center align-items-center h-10">
+          <div class="col-lg-7 " style="margin-top:10px">
+            <h1 style="color:#380163 !important" class="display-5 fw-bold text-body-emphasis lh-1 mb-3 ">Oops! There are no job posts</h1>
+            <img src="images/nojobpost.gif" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="350" height="500" loading="lazy">
+            <div class="d-grid gap-2 d-md-flex justify-content-center">
+             <a href="/main/postjob" class="btn btn-primary btn-lg px-4 me-md-2" style="border-radius: 30px; font-size: 16px; text-decoration:none; color: white; text-transform: uppercase; background-color: #8F00FF;">ADD JOB POST</a>
+            </div>
+          </div>
+            </div>
+          </div>
 {{/if}}
+{{/if}}
+<style>
+  .job-actions {
+  display: flex;
+  align-items: center;
+}
+
+.check-applicants-link {
+  color: #8F00FF;
+  text-decoration: none;
+  margin-left: 10px;
+}
+  
+  .job-list {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.job-item {
+  width: 100%; 
+  margin: 10px auto;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  border-bottom: 0.50px #D9D9D9 solid;
+  display: flex;
+  align-items: center;
+}
+
+.job-detail {
+  width: 300px;
+  color: #380163;
+  font-size: 16px;
+  font-family: Syne;
+  font-weight: 700;
+  line-height: 35.20px;
+  word-wrap: break-word;
+  margin-right: 10px; 
+}
+.btn-outline-remove{
+  font-size: 16px;
+  color: #8F00FF;
+  border: none;
+  text-transform: uppercase;
+  background-color: white;
+  border:solid 2px #8F00FF;
+
+}
+.btn-outline-success {
+  font-size: 16px;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  background-color: #8F00FF;
+}</style>
+
+      </div>
+ </div>
+      
+
+
+
+
+
+    <!-- BOOTSTRAP JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  
+    <!-- BOOSTRAP POPPER FOR DROPDOWNS, POPOVERS ETC
+    
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    -->
+
+</body>
+</html>
+
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Syne:wght@400;500;600;700;800&display=swap');
+
+*{
+    font-family: 'Inter', sans-serif;
+   
+
+}
+
+h1{
+    font-family: 'Syne', sans-serif;
+    color:#380163;
+}
+
+body{
+    background: linear-gradient(6deg, #FFF 0%, #e1baff 100%);
+
+    flex-shrink: 0;
+}
+.btn-outline-remove:hover{
+  background-color: #8F00FF;
+  color: white;}
+
+  .btn:hover{
+    transform: scale(1.1);
+  }
+  .link:hover{
+    font-weight: bold;
+  }
+ 
+</style>
+
 
