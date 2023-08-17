@@ -270,7 +270,7 @@ body{
           <a href="/mainpage/{{_id}}" style="color:white; text-decoration:none;">OPEN</a>
         </button>
         <form style="margin-bottom: 0px; margin-left: 10px;" action="/mainpage/{{_id}}/delete" method="POST">
-          <button class="btn btn-outline-success">
+          <button class="btn btn-outline-remove">
             REMOVE
           </button>
         </form>
@@ -336,7 +336,15 @@ body{
   word-wrap: break-word;
   margin-right: 10px; 
 }
+.btn-outline-remove{
+  font-size: 16px;
+  color: #8F00FF;
+  border: none;
+  text-transform: uppercase;
+  background-color: white;
+  border:solid 2px #8F00FF;
 
+}
 .btn-outline-success {
   font-size: 16px;
   color: white;
