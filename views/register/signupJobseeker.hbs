@@ -1,59 +1,168 @@
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hrd</title>
+    <!-- BOOTSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+</head>
   <body>
-    <div id="form-login">
-      <h2>Sign up</h2>
-      <form action="/signupJobseeker" method="POST">
-        <label>
-          Email
-          {{!  <input type="email" name="email" placeholder="rockstar@ironhack.com" />}}
-          {{#if email}}
-            <input
-              {{! required}}
-              type="email"
-              value="{{email}}"
-              name="email"
-              placeholder="rockstar@ironhack.com"
-            />
-          {{else}}
-            <input
-              {{! required}}
-              type="email"
-              name="email"
-              placeholder="rockstar@ironhack.com"
-            />
-          {{/if}}
-        </label>
-        <label>
-          Password
-          <input
-            {{! required}}
-            type="password"
-            name="password"
-            placeholder="Create your password"
-          />
-        </label>
-        <label>Repeat Password
-          <input
-            type="password"
-            name="repeatPassword"
-            placeholder="Retype your password"
-          />
-        </label>
-        <button type="submit">Sign up</button>
 
-        {{#if errorMessage}}
-          <p class="error">{{errorMessage}}</p>
-        {{/if}}
-      </form>
-    </div>
-    <style>
-      .error { color: #d8000c; background-color: #ffbaba; width: fit-content;
-      padding: 2px;}
-    </style>
-  </body>
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+          <div class="col-md-3 mb-2 mb-md-0">
+
+    <!-- LOGO-->
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+              <img class="logo" src="/images/Logo.png" alt="">
+            </a>
+          </div>
+    
+        
+    <!-- BUTTONS -->
+            <div class="col-md-3 text-end">
+          <a
+            class="btn btn-outline-primary me-2"
+            style="background-color:white; border-radius:30px; color:#8F00FF; font-size:16px; text-transform: uppercase; border:none;"
+            href="/login"
+          >Login</a>
+          <a
+            class="btn btn-primary signup"
+            style="margin-left: 10px; color:white;  border-radius:30px; font-size:16px; border:none; text-transform: uppercase;background-color:#8F00FF;"
+            href="/options"
+          >Sign-up</a>
+        </div>
+
+    <!-- HERO-->
+    
+     
+      <div class="container ">
+        <div class="row d-flex justify-content-center align-items-center h-10">
+          <div class="col-lg-12 col-xl-11">
+            
+              <div class="card-body p-md-1">
+                <div class="row justify-content-center">
+                  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 d-flex justify-content-center align-items-center">
+                    <img src="/images/signupjobseeker.png"
+                      class="img-fluid" alt="Sample image">
+                  </div>
+                   
+                  <div class="col-md-10 col-lg-6 col-xl-5 d-flex align-items-center order-1 order-lg-2 justify-content-center">
+                     
+     
+                    <form class="mx-1 mx-md-4" action="/signupJobseeker" method="POST">
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                      <a href="/companySignup" style="display: flex; align-items: center; text-decoration: none;">
+                        <div style="width: 20px; height: 20px; position: relative">
+                          <img style="padding-bottom: 7px; width: 15px;" src="/images/arrow.png" class="img-fluid" alt="Sample image">
+                        </div>
+                        <div style="color: #8692A6; font-size: 16px; font-family: Inter; font-weight: 600; word-wrap: break-word; margin-left: 10px;">Sign up as company</div>
+                      </a>
+                    </div>
+                    
+                      <div style="width: 419px; color: black; font-size: 30px; font-family: Inter; font-weight: 700; word-wrap: break-word">Sign up for an account as a Job seeker</div>
+                      <div style="width: 411px; color: #8692A6; font-size: 18px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word; margin-bottom: 20px;">Start your job search today!</div>
+                      <div class="d-flex flex-row align-items-center mb-2 ">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          {{#if email}}
+                          <input type="email" id="form3Example3c" class="form-control" placeholder="Email" value="{{email}}"  name="email"/>
+                          <label class="form-label" for="form3Example3c">Your Email</label>
+                          {{else}}
+                           <input type="email" id="form3Example3c" class="form-control" placeholder="Email"  name="email"/>
+                          <label class="form-label" for="form3Example3c">Your Email</label>
+                          {{/if}}
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-2 ">
+                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="password" id="form3Example4c" class="form-control" placeholder="Password" name="password"/>
+                          <label class="form-label" for="form3Example4c">Password</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-2 ">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="password" id="form3Example4cd" class="form-control" placeholder="Password"  name="repeatPassword" />
+                          <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                        </div>
+                      </div>
+    
+                      <div class="form-check d-flex justify-content-center mb-2">
+                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                        <label style="font-size: small" class="form-check-label" for="form2Example3">
+                          I agree all statements in <a href="#!">Terms of service</a>
+                        </label>
+                      </div>
+    
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" style="margin: 0 !important; width: 97%;  font-size:16px; color:white; border:none; text-transform: uppercase;background-color:#8F00FF;" class="btn btn-primary btn-lg px-4 me-md-2">Register</button>
+                       
+                      </div>
+                        {{#if errorMessage}}
+                          <p class="error">{{errorMessage}}</p>
+                        {{/if}}
+                    </form>
+                    
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+   
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Syne:wght@400;500;600;700;800&display=swap');
+
+*{
+    font-family: 'Inter', sans-serif;
+   
+
+}
+
+h1{
+    font-family: 'Syne', sans-serif;
+    color:#380163;
+}
+
+body{
+    background: linear-gradient(6deg, #FFF 0%, #e1baff 100%);
+    
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+  .btn:hover{
+    transform: scale(1.1);
+  }
+  
+  .error { color: #d8000c; background-color: #ffbaba; width: fit-content;
+      padding: 2px;
+      margin-top: 20px;
+      margin-left: 10px;
+      border-radius: 5px;
+     
+      }
+ </style>
+
+    <!-- FOOTER-->
+     
+
+    <!-- BOOTSTRAP JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  
+    <!-- BOOSTRAP POPPER FOR DROPDOWNS, POPOVERS ETC
+    
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    -->
+
+</body>
 </html>

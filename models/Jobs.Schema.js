@@ -1,10 +1,14 @@
+const { text } = require("express");
 const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const jobSchema = new Schema({
+  companyName: {
+    type: String,
+  },
   title: {
     type: String,
-    required: [true, "Job title is required"],
+    //required: [true, "Job title is required"],
   },
   description: {
     type: String,
@@ -43,11 +47,11 @@ const jobSchema = new Schema({
   },
 
   salary: {
-    type: Number,
+    type: String,
     //required: [true, "Salary is required"],
   },
 
-  responsabilities: {
+  responsibilities: {
     type: String,
     //required: [true, "Responsabilities is required"],
   },

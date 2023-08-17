@@ -15,13 +15,20 @@ router.get("/companySignup", isLoggedOut, (req, res, next) => {
 
 
 router.post("/signupCompany", (req, res, next) => {
-    let { email, password, isJobseeker } = req.body;
+    let { email, password, repeatPassword,isJobseeker } = req.body;
     isJobseeker=false;
     if (email === "" || password === "")
       res.status(400).render("register/signupCompany", {
         errorMessage: "Email and Password are mandatory fields.",
         email,
       });
+      else if (password !== repeatPassword) {
+        errorMessage = "Passwords do not match.";
+        res.status(400).render("register/signupCompany", {
+          errorMessage,
+          email,
+        });
+      }
     else {
       bcrypt
         .genSalt(saltRounds)
@@ -30,7 +37,9 @@ router.post("/signupCompany", (req, res, next) => {
           return User.create({ email, passwordHash,isJobseeker });
         })
         .then((user) => {
-          res.render("index", { user });
+          req.session.currentUser = user;
+          res.redirect("/userProfile");
+          
         })
         .catch((err) => {
           if (err.code === 11000) {

@@ -29,6 +29,7 @@ router.get("/main/postjob", isLoggedIn, (req, res, next) => {
 
 router.post("/main/postjob", isLoggedIn, (req, res, next) => {
   let {
+    companyName,
     title,
     description,
     location,
@@ -36,12 +37,13 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
     industry,
     contractType,
     salary,
-    responsabilities,
+    responsibilities,
     qualifications,
     postedJob,
   } = req.body;
   let postedBy = req.session.currentUser._id;
   return Jobs.create({
+    companyName:companyName,
     title: title,
     description: description,
     location: location,
@@ -50,7 +52,7 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
     industry: industry,
     contractType: contractType,
     salary: salary,
-    responsabilities: responsabilities,
+    responsibilities: responsibilities,
     qualifications: qualifications,
     postedJob: postedJob,
   }).then(() => {
@@ -60,15 +62,22 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
 
 router.get("/mainpage", isLoggedIn, (req, res, next) => {
   const currentUser = req.session.currentUser;
-  Jobs.find().then((data) => {
-    const jobs = data;
-    res.render("../views/main.hbs", { currentUser, jobs });
-  });
+ 
+  Jobs.find()
+    .then((data) => {
+      const jobs = data;
+      res.render("../views/main.hbs", { currentUser, jobs});
+    })
+    .catch(error => console.log(error))
 });
 
 router.get("/mainpage/:id", isLoggedIn, (req, res, next) => {
+  
+  const currentUser = req.session.currentUser
+  
   Jobs.findById(req.params.id).then((oneJob) => {
-    res.render("jobposting/jobapply.hbs", oneJob);
+   
+    res.render("jobposting/jobapply.hbs",{currentUser,oneJob});
   });
 });
 
@@ -76,34 +85,41 @@ router.get("/jobsapplied", isLoggedIn, (req, res, next) => {
   const userId = req.session.currentUser._id;
   const currentUser = req.session.currentUser;
 
-  Jobs.find({ appliedBy: userId }).then((jobs) => {
-    if (jobs.length > 0) {
-      res.render("jobsapplied.hbs", { jobs, currentUser });
-    } else {
-      res.render("nojobsapplied.hbs");
-    }
-  });
+  Jobs.find({ appliedBy: userId })
+    .then((jobs) => {
+      if (jobs.length > 0) {
+        res.render("jobsapplied.hbs", { jobs, currentUser });
+      } else {
+        res.render("nojobsapplied.hbs");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+     
+    });
 });
 
 router.post("/mainpage/:id", isLoggedIn, (req, res, next) => {
   console.log(req.session);
   let appliedBy = req.session.currentUser._id;
-  return Jobs.findByIdAndUpdate(
+  Jobs.findByIdAndUpdate(
     req.params.id,
     { $addToSet: { appliedBy } },
     { new: true }
   )
     .then((updatedJob) => {
       console.log(updatedJob);
+
       res.redirect("/mainpage");
     })
     .catch((error) => {
       console.log(error);
 
       // Call the error-middleware to display the error page to the user
-      next(error);
+     // next(error);
     });
 });
+
 
 router.post("/mainpage/:id/delete", (req, res) => {
   Jobs.findByIdAndDelete(req.params.id)
