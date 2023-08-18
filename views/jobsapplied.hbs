@@ -25,14 +25,14 @@
     
         
     <!-- BUTTONS -->
-    <div class="col-md-4 text-end">
+     <div class="col-md-4 text-end">
       <div style="width: 100%; height: 100%; justify-content: flex-start; align-items: flex-start; gap: 60px; display: inline-flex">
         <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-            <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="">Explore</a></div>
+            <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="/mainpage">Explore</a></div>
             <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
         </div>
         <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-          <div style=" width: 140px; color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="">Your applications</a></div>
+          <div style=" width: 140px; color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="/jobsapplied">Your applications</a></div>
           <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
         </div>
         <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
@@ -40,16 +40,34 @@
           <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
         </div>
         <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-            <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="">Account</a></div>
+            <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="/userProfile/edit">Account</a></div>
             <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
         </div>
-        <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-          <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color:#8F00FF; text-decoration:none;" href="">Logout</a></div>
-          <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
-      </div>
+         <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+       <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+    <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+    
+    
+        
+      <form id="logout-form" action="/logout" method="POST">
+        <a class="link" style="color:#8F00FF; text-decoration:none;" href="#" id="logout-link">Logout </a>
+      </form>
+      
+    <script>
+        document.getElementById("logout-link").addEventListener("click", function(event) {
+        event.preventDefault();
+        document.getElementById("logout-form").submit();
+        });
+    </script>
+</div>
+
+</div>
+
+        <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
     </div>
-    </div>
-  </header>
+  </div>
+  </div>
+</header>
 </div>
 
 {{#if currentUser.isJobseeker}}
