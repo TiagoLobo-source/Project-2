@@ -46,9 +46,9 @@ router.post("/login", (req, res, next) => {
     } else if (bcrypt.compareSync(password, user.passwordHash)) {
       req.session.currentUser = user;
       if (user.isJobseeker) {
-        res.redirect("/main");
-      } else {
         res.redirect("/mainpage");
+      } else {
+        res.redirect("/main");
       }
     } else {
       res.render("register/login", {
