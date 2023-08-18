@@ -10,7 +10,7 @@ const saltRounds = 10;
 
 /* GET home page */
 router.get("/options", (req, res, next) => {
-  console.log("asdas");
+  
   res.render("register/step2");
 });
 
