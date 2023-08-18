@@ -244,7 +244,10 @@ body{
      
     <!-- HERO-->
      {{#if currentUser.isJobseeker}}
-    <form action="/main/postjob" method="POST" style="margin: 0 30% 0 30%;">
+    <form  action="/userProfile/edit"
+      method="POST"
+      enctype="multipart/form-data"
+     style="margin: 0 30% 0 30%;">
       <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-1 border-bottom">
           <div class="container">
@@ -278,13 +281,13 @@ body{
         <label for="exampleFormControlInput1">CV</label>
         <input type="file" value="{{currentUser.cv}}" name="cv" />
       </div>
-   
+   <button type="submit">Save Details</button>
       {{#if errorMessage}}
           <p class="error">{{errorMessage}}</p>
         {{/if}}
     </form>
       {{else}}
-<form action="/main/postjob" method="POST" style="margin: 0 30% 0 30%;">
+<form action="/userProfile/edit" method="POST" style="margin: 0 30% 0 30%;">
       <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-1 border-bottom">
           <div class="container">
@@ -318,7 +321,7 @@ body{
         <label for="exampleFormControlInput1">CV</label>
         <input type="file" value="{{currentUser.cv}}" name="cv" />
       </div>
-   
+   <button type="submit">Save Details</button>
       {{#if errorMessage}}
           <p class="error">{{errorMessage}}</p>
         {{/if}}
