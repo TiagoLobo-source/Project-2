@@ -38,7 +38,7 @@ router.post("/signupJobseeker", (req, res, next) => {
       })
       .then((user) => {
         req.session.currentUser = user;
-        res.redirect("/mainpage");
+        res.redirect("/userProfile");
       })
       .catch((err) => {
         if (err.code === 11000) {
