@@ -36,24 +36,28 @@ router.post("/login", (req, res, next) => {
   }
 
   User.findOne({ email })
-    .then((user) => {
-      if (!user) {
-        res.render("register/login", {
-          errorMessage: "Email is not registered. Try with other email.",
-          email,
-        });
-        return;
-      } else if (bcrypt.compareSync(password, user.passwordHash)) {
-        req.session.currentUser = user;
-        res.redirect("/userProfile");
+  .then((user) => {
+    if (!user) {
+      res.render("register/login", {
+        errorMessage: "Email is not registered. Try with other email.",
+        email,
+      });
+      return;
+    } else if (bcrypt.compareSync(password, user.passwordHash)) {
+      req.session.currentUser = user;
+      if (user.isJobseeker) {
+        res.redirect("/main");
       } else {
-        res.render("register/login", {
-          errorMessage: "Incorrect password.",
-          email,
-        });
+        res.redirect("/mainpage");
       }
-    })
-    .catch((error) => next(error));
+    } else {
+      res.render("register/login", {
+        errorMessage: "Incorrect password.",
+        email,
+      });
+    }
+  })
+  .catch((error) => next(error));
 });
 
 // routes/auth.routes.js
