@@ -161,24 +161,3 @@ body{
   
 </body>
 </html>
-
-<script>
-function isJobseeker(req, res, next) {
-  const currentUser = req.session.currentUser;
-  if (currentUser && currentUser.isJobseeker) {
-    return next(); 
-  } else {
-    res.redirect("/mainpage"); 
-  }
-}
-
-
-function isCompany(req, res, next) {
-  const currentUser = req.session.currentUser;
-  if (currentUser && !currentUser.isJobseeker) {
-    return next(); 
-  } else {
-    res.redirect("/main"); 
-  }
-}
-</script>
