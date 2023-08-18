@@ -59,6 +59,18 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
     res.redirect("/main");
   });
 });
+router.get("/mainpage2", isLoggedIn, (req, res, next) => {
+  const currentUser = req.session.currentUser;
+  const companyId = currentUser.companyId; 
+
+  Jobs.find({ companyId: ObjectId(companyId) }) 
+    .then((jobs) => {
+      res.render("../views/main.hbs", { currentUser, jobs });
+    })
+    .catch(error => console.log(error));
+});
+
+
 
 router.get("/mainpage", isLoggedIn, (req, res, next) => {
   const currentUser = req.session.currentUser;

@@ -38,7 +38,7 @@ router.post("/signupCompany", (req, res, next) => {
         })
         .then((user) => {
           req.session.currentUser = user;
-          res.redirect("/userProfile");
+          res.redirect("/mainpage2");
           
         })
         .catch((err) => {
