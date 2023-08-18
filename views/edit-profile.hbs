@@ -1,146 +1,3 @@
-<div id="form">
-  <h2>Edit Profile</h2>
-  {{#if currentUser.isJobseeker}}
-    <form
-      action="/userProfile/edit"
-      method="POST"
-      enctype="multipart/form-data"
-    >
-
-      <label>
-        First Name
-        <input type="text" value="{{currentUser.firstName}}" name="firstName" />
-      </label><br /><br /><br /><br />
-      <label>
-        Last Name
-        <input
-          type="text"
-          value="{{currentUser.lastName}}"
-          name="lastName"
-          placeholder="Last Name"
-        />
-
-        currentUser.firstName
-        currentUser.lastName
-        Birthday currentUser.dateOfBirth
-        currentUser.aboutMe
-        currentUser.professionalExperience
-        currentUser.cv
-      </label><br /><br /><br /><br />
-      <label>Birthday</label>
-      <input
-        type="date"
-        value="{{currentUser.dateOfBirth}}"
-        name="dateOfBirth"
-
-      />
-      <br />
-      <br />
-      <br />
-      <br />
-      <label>
-        About Me
-        <input
-          type="text"
-          value="{{currentUser.aboutMe}}"
-          name="aboutMe"
-          placeholder="Describe yourself briefly"
-        />
-      </label><br /><br /><br /><br />
-      <label>
-        Professional Experience
-        <input
-          type="text"
-          value="{{currentUser.professionalExperience}}"
-          name="professionalExperience"
-          placeholder="Past Jobs"
-        />
-      </label><br /><br /><br /><br />
-      <label>
-        CV
-        <input type="file" value="{{currentUser.cv}}" name="cv" />
-      </label><br /><br /><br /><br />
-
-      <button type="submit">Save Details</button>
-      {{#if errorMessage}}
-        <p class="error">{{errorMessage}}</p>
-      {{/if}}
-
-    </form>
-
-  {{else}}
-
-    <form action="/userProfile/edit" method="POST">
-
-      <label>
-        Company Name
-        <input
-          type="companyName"
-          value="{{currentUser.companyName}}"
-          name="companyName"
-          placeholder="Company Name"
-        /></label>
-      <br />
-      <br /><br /><br />
-      <label>
-        Location
-        <input
-          type="companyLocation"
-          value="{{currentUser.companyLocation}}"
-          name="companyLocation"
-          placeholder="Company Location"
-        /></label>
-      <br />
-      <br /><br /><br />
-      <label>
-        Description
-        <input
-          type="companyDescription"
-          value="{{currentUser.companyDescription}}"
-          name="companyDescription"
-          placeholder="Company Description"
-        /></label>
-      <br />
-      <br /><br /><br />
-      <label>
-        Industry
-        <input
-          type="companyIndustry"
-          value="{{currentUser.companyIndustry}}"
-          name="companyIndustry"
-          placeholder="Company Industry"
-        />
-      </label><br /><br /><br /><br />
-      <label>
-        Number of Employees
-        <input
-          type="companyNumberOfEmployees"
-          value="{{currentUser.companyNumberOfEmployees}}"
-          name="companyNumberOfEmployees"
-          placeholder="0"
-        /></label>
-      <br />
-      <br /><br /><br />
-      <label>
-        Contact Info
-        <input
-          type="companyContactInfo"
-          value="{{currentUser.companyContactInfo}}"
-          name="companyContactInfo"
-          placeholder="Contact Info"
-        /></label>
-      <br />
-      <br /><br /><br />
-
-      <button type="submit">Save Details</button>
-      {{#if errorMessage}}
-        <p class="error">{{errorMessage}}</p>
-      {{/if}}
-
-    </form>
-
-  {{/if}}
-
 </div>
 
 <!doctype html>
@@ -295,40 +152,44 @@ body{
         {{/if}}
     </form>
       {{else}}
-<form action="/userProfile/edit" method="POST" style="margin: 0 30% 0 30%;">
+<form  action="/userProfile/edit"
+      method="POST"
+      enctype="multipart/form-data"
+     style="margin: 0 30% 0 30%;">
       <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-1 border-bottom">
           <div class="container">
-            <h1 class="mt-4 mb-4">Company details</h1>
+            <h1 class="mt-4 mb-4">Account details</h1>
         </div> 
         </header>
         <div class="form-group">
-        <label for="exampleFormControlInput1">First Name</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="First Name" name="firstName" value="{{currentUser.firstName}}">
+        <label for="exampleFormControlInput1">Company Name</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Company Name" name="companyName" value="{{currentUser.companyName}}">
 
       </div>
       <div class="form-group">
-        <label for="exampleFormControlInput1">Last Name</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Last Name" name="lastName" value="{{currentUser.lastName}}">
+        <label for="exampleFormControlInput1">Location </label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Location" name="companyLocation" value="{{currentUser.companyLocation}}">
 
       </div>
       <div class="form-group">
-        <label for="exampleFormControlTextarea1">Birthday</label>
-        <input type="text"  class="form-control" id="exampleFormControlTextarea1" placeholder="01-01-1988" name="dateOfBirth " value="{{currentUser.dateOfBirth}}"></textarea>
+        <label for="exampleFormControlTextarea1">Description</label>
+        <input type="text"  class="form-control" id="exampleFormControlTextarea1" placeholder="Description" name="companyDescription " value="{{currentUser.companyDescription}}">
+      </div>
+           
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Industry</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="companyIndustry" placeholder="Industry"  value="{{currentUser.companyIndustry}}">
       </div>
       <div class="form-group">
-        <label for="exampleFormControlTextarea1">About me</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="aboutMe" value="{{currentUser.aboutMe}}"></textarea>
+        <label for="exampleFormControlInput1">Number of Employees</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="companyNumberOfEmployees" placeholder="Number of Employees"  value="{{currentUser.companyNumberOfEmployees}}">
       </div>
       <div class="form-group">
-        <label for="exampleFormControlInput1">Professional experience</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" name="professionalExperience" placeholder="Projects, Jobs, Education"  value="{{currentUser.professionalExperience}}">
+        <label for="exampleFormControlInput1">Contact</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="companyContactInfo" placeholder="Contact"  value="{{currentUser.companyContactInfo}}">
       </div>
       
-      <div class="form-group">
-        <label for="exampleFormControlInput1">CV</label>
-        <input type="file" value="{{currentUser.cv}}" name="cv" />
-      </div>
    <button type="submit">Save Details</button>
       {{#if errorMessage}}
           <p class="error">{{errorMessage}}</p>
