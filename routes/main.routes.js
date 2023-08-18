@@ -59,7 +59,7 @@ router.post("/main/postjob", isLoggedIn, (req, res, next) => {
     res.redirect("/main");
   });
 });
-router.get("/mainpage2", isLoggedIn, (req, res, next) => {
+router.get("/mainpage", isLoggedIn, (req, res, next) => {
   const currentUser = req.session.currentUser;
   const companyId = currentUser.companyId; 
 
