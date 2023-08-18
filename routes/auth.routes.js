@@ -73,7 +73,6 @@ router.post(
   multerCloudinary.single("cv"),
   isLoggedIn,
   (req, res) => {
-    res.render("edit-profile", { currentUser: req.session.currentUser });
     let {
       firstName,
       lastName,
@@ -115,13 +114,15 @@ router.post(
       .then((updatedUser) => {
         req.session.currentUser = updatedUser;
         console.log(updatedUser);
-        res.redirect("/userProfile");
+        res.render("edit-profile", { currentUser: updatedUser });
       })
       .catch((err) => {
         console.log(err);
       });
   }
 );
+
+
 router.get("/userProfile/edit", isLoggedIn, (req, res) => {
   res.render("edit-profile", { currentUser: req.session.currentUser });
 });

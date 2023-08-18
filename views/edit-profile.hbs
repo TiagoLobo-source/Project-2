@@ -251,7 +251,7 @@ body{
       <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-1 border-bottom">
           <div class="container">
-            <h1 class="mt-4 mb-4">Job Post</h1>
+            <h1 class="mt-4 mb-4">Account details</h1>
         </div> 
         </header>
         <div class="form-group">
@@ -275,9 +275,10 @@ body{
         name="dateOfBirth"
 
       />
+      
       <div class="form-group">
-        <label for="exampleFormControlTextarea1">About me</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="aboutMe" value="{{currentUser.aboutMe}}"></textarea>
+        <label for="exampleFormControlInput1">About me</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="aboutMe" placeholder="About me"  value="{{currentUser.aboutMe}}">
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Professional experience</label>
@@ -298,7 +299,7 @@ body{
       <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-md-start py-3 mb-1 border-bottom">
           <div class="container">
-            <h1 class="mt-4 mb-4">Job Post</h1>
+            <h1 class="mt-4 mb-4">Company details</h1>
         </div> 
         </header>
         <div class="form-group">
