@@ -32,10 +32,10 @@
             {{else}}<div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="/main">Explore</a></div>{{/if}}
             <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
         </div>
-        <div style=" justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+        {{#if currentUser.isJobseeker}} <div style=" justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
           <div style=" width: 140px; color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link" style="color: #8F00FF; text-decoration:none;" href="/jobsapplied">Your applications</a></div>
           <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
-        </div>
+        </div> {{else}}{{/if}}
         <div style=" justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
           <div style="color: #380163; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word"><a class="link"  style="color: #8F00FF; text-decoration:none;" href="">Favourites</a></div>
           <div style="align-self: stretch; height: 0px; opacity: 0; border: 0.50px #380163 solid"></div>
